@@ -117,7 +117,7 @@ module Excon
           # finish first line with "HTTP/1.1\r\n"
           request << HTTP_1_1
 
-          if datum.has_key?(:request_block)
+          if datum.has_key?(:request_block) && datum[:chunked] != false
             datum[:headers]['Transfer-Encoding'] = 'chunked'
           else
             body = datum[:body].is_a?(String) ? StringIO.new(datum[:body]) : datum[:body]
